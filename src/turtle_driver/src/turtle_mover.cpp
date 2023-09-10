@@ -67,4 +67,5 @@ void drive_circle(double radius, bool isForward)
     stop_msg.angular.y = 0;
     stop_msg.angular.z = 0;
 
+    vel_publisher.publish(stop_msg);
 }
