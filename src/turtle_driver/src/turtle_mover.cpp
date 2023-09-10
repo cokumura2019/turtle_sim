@@ -4,7 +4,7 @@ ros::Publisher vel_publisher;
 
 void drive_circle(double radius, bool isForward);
 
-double speed = 1;
+double speed = 2;
 const double PI = 3.141592653589793238;
 
 int main(int argc, char *argv[])
@@ -13,12 +13,19 @@ int main(int argc, char *argv[])
     ros::NodeHandle n;
 
     vel_publisher = n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 10);
-
-    double radius =0;
-
+    
+    double radius = 1;
+    try
+    {
+        radius = atoi(argv[1]);
+    }
+    catch(const std::exception& e)
+    {
+    }
+    
     ROS_INFO("\n\n\n********** START TESTING **************");
-    std::cout << "enter radius*: ";
-    std::cin >> radius;
+//    std::cout << "enter radius*: ";
+//    std::cin >> radius;
 
     drive_circle(radius, true);
 }
@@ -49,7 +56,7 @@ void drive_circle(double radius, bool isForward)
     
     double t0 = ros::Time::now().toSec();
     double current_angle=0;
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(1000);
     do 
     {
         vel_publisher.publish(vel_msg);
