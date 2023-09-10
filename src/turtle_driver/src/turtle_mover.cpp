@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     double radius =0;
 
     ROS_INFO("\n\n\n********** START TESTING **************");
-    std::cout << "enter radius: ";
+    std::cout << "enter radius*: ";
     std::cin >> radius;
 
     drive_circle(radius, true);

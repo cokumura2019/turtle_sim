@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(turtle_driver_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT " " STREQUAL " ")
+if(NOT "/home/chris/Documents/pet_ws/devel/include " STREQUAL " ")
   set(turtle_driver_INCLUDE_DIRS "")
-  set(_include_dirs "")
+  set(_include_dirs "/home/chris/Documents/pet_ws/devel/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/chris/Documents/pet_ws/devel/lib;/home/chris/Documents/pet_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/chris/Documents/pet_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -177,7 +177,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(turtle_driver_EXPORTED_TARGETS "")
+set(turtle_driver_EXPORTED_TARGETS "turtle_driver_generate_messages_cpp;turtle_driver_generate_messages_eus;turtle_driver_generate_messages_lisp;turtle_driver_generate_messages_nodejs;turtle_driver_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${turtle_driver_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -214,7 +214,7 @@ foreach(depend ${depends})
   _list_append_deduplicate(turtle_driver_EXPORTED_TARGETS ${${turtle_driver_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "")
+set(pkg_cfg_extras "turtle_driver-msg-extras.cmake")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${turtle_driver_DIR}/${extra})
