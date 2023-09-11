@@ -11,6 +11,14 @@ ros/ros.h
 /home/chris/Documents/pet_ws/src/turtle_driver/src/ros/ros.h
 geometry_msgs/Twist.h
 /home/chris/Documents/pet_ws/src/turtle_driver/src/geometry_msgs/Twist.h
+turtlesim/Pose.h
+/home/chris/Documents/pet_ws/src/turtle_driver/src/turtlesim/Pose.h
+vector2.h
+/home/chris/Documents/pet_ws/src/turtle_driver/src/vector2.h
+
+/home/chris/Documents/pet_ws/src/turtle_driver/src/vector2.h
+cmath
+-
 
 /opt/ros/noetic/include/geometry_msgs/Twist.h
 string
@@ -695,6 +703,22 @@ ros/forwards.h
 /opt/ros/noetic/include/ros/ros/forwards.h
 
 /opt/ros/noetic/include/rosconsole/macros_generated.h
+
+/opt/ros/noetic/include/turtlesim/Pose.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
 
 /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 ros/macros.h

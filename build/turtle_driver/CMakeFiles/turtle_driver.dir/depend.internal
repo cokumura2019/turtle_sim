@@ -3,6 +3,7 @@
 
 turtle_driver/CMakeFiles/turtle_driver.dir/src/turtle_mover.cpp.o
  /home/chris/Documents/pet_ws/src/turtle_driver/src/turtle_mover.cpp
+ /home/chris/Documents/pet_ws/src/turtle_driver/src/vector2.h
  /opt/ros/noetic/include/geometry_msgs/Twist.h
  /opt/ros/noetic/include/geometry_msgs/Vector3.h
  /opt/ros/noetic/include/ros/advertise_options.h
@@ -61,5 +62,6 @@ turtle_driver/CMakeFiles/turtle_driver.dir/src/turtle_mover.cpp.o
  /opt/ros/noetic/include/ros/wall_timer.h
  /opt/ros/noetic/include/ros/wall_timer_options.h
  /opt/ros/noetic/include/rosconsole/macros_generated.h
+ /opt/ros/noetic/include/turtlesim/Pose.h
  /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h

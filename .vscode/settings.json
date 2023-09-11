@@ -6,5 +6,8 @@
         "/opt/ros/noetic/lib/python3/dist-packages"
     ],
     "cmake.configureOnOpen": false,
-    "cmake.sourceDirectory": "/home/chris/Documents/pet_ws/src/turtle_driver"
+    "cmake.sourceDirectory": "/home/chris/Documents/pet_ws/src/turtle_driver",
+    "files.associations": {
+        "random": "cpp"
+    }
 }
