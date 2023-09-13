@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "turtle_driver: 1 messages, 0 services")
+message(STATUS "turtle_driver: 1 messages, 3 services")
 
 set(MSG_I_FLAGS "-Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
@@ -22,6 +22,21 @@ add_custom_target(_turtle_driver_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "turtle_driver" "/home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg" ""
 )
 
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv" NAME_WE)
+add_custom_target(_turtle_driver_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "turtle_driver" "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv" ""
+)
+
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv" NAME_WE)
+add_custom_target(_turtle_driver_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "turtle_driver" "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv" ""
+)
+
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv" NAME_WE)
+add_custom_target(_turtle_driver_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "turtle_driver" "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv" ""
+)
+
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
@@ -36,6 +51,24 @@ _generate_msg_cpp(turtle_driver
 )
 
 ### Generating Services
+_generate_srv_cpp(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_cpp(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_cpp(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/turtle_driver
+)
 
 ### Generating Module File
 _generate_module_cpp(turtle_driver
@@ -50,6 +83,12 @@ add_dependencies(turtle_driver_generate_messages turtle_driver_generate_messages
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_cpp _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_cpp _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_cpp _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv" NAME_WE)
 add_dependencies(turtle_driver_generate_messages_cpp _turtle_driver_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -69,6 +108,24 @@ _generate_msg_eus(turtle_driver
 )
 
 ### Generating Services
+_generate_srv_eus(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_eus(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_eus(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/turtle_driver
+)
 
 ### Generating Module File
 _generate_module_eus(turtle_driver
@@ -83,6 +140,12 @@ add_dependencies(turtle_driver_generate_messages turtle_driver_generate_messages
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_eus _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_eus _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_eus _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv" NAME_WE)
 add_dependencies(turtle_driver_generate_messages_eus _turtle_driver_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -102,6 +165,24 @@ _generate_msg_lisp(turtle_driver
 )
 
 ### Generating Services
+_generate_srv_lisp(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_lisp(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_lisp(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/turtle_driver
+)
 
 ### Generating Module File
 _generate_module_lisp(turtle_driver
@@ -116,6 +197,12 @@ add_dependencies(turtle_driver_generate_messages turtle_driver_generate_messages
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_lisp _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_lisp _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_lisp _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv" NAME_WE)
 add_dependencies(turtle_driver_generate_messages_lisp _turtle_driver_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -135,6 +222,24 @@ _generate_msg_nodejs(turtle_driver
 )
 
 ### Generating Services
+_generate_srv_nodejs(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_nodejs(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_nodejs(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/turtle_driver
+)
 
 ### Generating Module File
 _generate_module_nodejs(turtle_driver
@@ -149,6 +254,12 @@ add_dependencies(turtle_driver_generate_messages turtle_driver_generate_messages
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_nodejs _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_nodejs _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_nodejs _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv" NAME_WE)
 add_dependencies(turtle_driver_generate_messages_nodejs _turtle_driver_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -168,6 +279,24 @@ _generate_msg_py(turtle_driver
 )
 
 ### Generating Services
+_generate_srv_py(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_py(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/turtle_driver
+)
+_generate_srv_py(turtle_driver
+  "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/turtle_driver
+)
 
 ### Generating Module File
 _generate_module_py(turtle_driver
@@ -182,6 +311,12 @@ add_dependencies(turtle_driver_generate_messages turtle_driver_generate_messages
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_py _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_py _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv" NAME_WE)
+add_dependencies(turtle_driver_generate_messages_py _turtle_driver_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv" NAME_WE)
 add_dependencies(turtle_driver_generate_messages_py _turtle_driver_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

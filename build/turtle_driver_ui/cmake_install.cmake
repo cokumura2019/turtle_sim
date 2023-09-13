@@ -52,3 +52,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/turtle_driver_ui" TYPE FILE FILES "/home/chris/Documents/pet_ws/src/turtle_driver_ui/package.xml")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/turtle_driver_ui" TYPE PROGRAM FILES "/home/chris/Documents/pet_ws/build/turtle_driver_ui/catkin_generated/installspace/turtle_controller.py")
+endif()
+

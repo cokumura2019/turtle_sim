@@ -54,6 +54,9 @@ CMAKE_BINARY_DIR = /home/chris/Documents/pet_ws/build
 include turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/progress.make
 
 turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/msg/Vel.l
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/circle.l
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/square.l
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/custom.l
 turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/manifest.l
 
 
@@ -62,12 +65,30 @@ turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus: /home/chris/Docume
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from turtle_driver/Vel.msg"
 	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/msg
 
+/home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/circle.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/circle.l: /home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from turtle_driver/circle.srv"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv
+
+/home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/square.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/square.l: /home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from turtle_driver/square.srv"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv
+
+/home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/custom.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/custom.l: /home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from turtle_driver/custom.srv"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv
+
 /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp manifest code for turtle_driver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp manifest code for turtle_driver"
 	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver turtle_driver std_msgs
 
 turtle_driver_generate_messages_eus: turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus
 turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/msg/Vel.l
+turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/circle.l
+turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/square.l
+turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/srv/custom.l
 turtle_driver_generate_messages_eus: /home/chris/Documents/pet_ws/devel/share/roseus/ros/turtle_driver/manifest.l
 turtle_driver_generate_messages_eus: turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/build.make
 

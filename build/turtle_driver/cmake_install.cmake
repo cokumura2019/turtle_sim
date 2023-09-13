@@ -42,6 +42,14 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/turtle_driver/srv" TYPE FILE FILES
+    "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv"
+    "/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv"
+    "/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv"
+    )
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/turtle_driver/cmake" TYPE FILE FILES "/home/chris/Documents/pet_ws/build/turtle_driver/catkin_generated/installspace/turtle_driver-msg-paths.cmake")
 endif()
 

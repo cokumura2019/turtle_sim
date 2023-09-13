@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = "/home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg"
-services_str = ""
+services_str = "/home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv;/home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv;/home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv"
 pkg_name = "turtle_driver"
 dependencies_str = "std_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

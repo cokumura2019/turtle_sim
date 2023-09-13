@@ -91,6 +91,17 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -101,16 +112,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
@@ -124,16 +125,15 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
 
-# Special rule for the target test
-test/fast: test
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
 
-.PHONY : test/fast
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,19 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-.PHONY : turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+turtle_driver/CMakeFiles/turtle_driver.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver.dir/rule
+.PHONY : turtle_driver/CMakeFiles/turtle_driver.dir/rule
 
 # Convenience name for target.
-rosgraph_msgs_generate_messages_py: turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+turtle_driver: turtle_driver/CMakeFiles/turtle_driver.dir/rule
 
-.PHONY : rosgraph_msgs_generate_messages_py
+.PHONY : turtle_driver
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_py/fast:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
+turtle_driver/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/turtle_driver.dir/build.make turtle_driver/CMakeFiles/turtle_driver.dir/build
+.PHONY : turtle_driver/fast
 
 # Convenience name for target.
 turtle_driver/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
@@ -256,6 +256,51 @@ std_msgs_generate_messages_cpp: turtle_driver/CMakeFiles/std_msgs_generate_messa
 std_msgs_generate_messages_cpp/fast:
 	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make turtle_driver/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+.PHONY : turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_py: turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_py
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_py/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+.PHONY : rosgraph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_circle.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_circle.dir/rule
+.PHONY : turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_circle.dir/rule
+
+# Convenience name for target.
+_turtle_driver_generate_messages_check_deps_circle: turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_circle.dir/rule
+
+.PHONY : _turtle_driver_generate_messages_check_deps_circle
+
+# fast build rule for target.
+_turtle_driver_generate_messages_check_deps_circle/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_circle.dir/build.make turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_circle.dir/build
+.PHONY : _turtle_driver_generate_messages_check_deps_circle/fast
+
+# Convenience name for target.
+turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_cpp: turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 turtle_driver/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
@@ -438,6 +483,51 @@ turtle_driver_generate_messages/fast:
 .PHONY : turtle_driver_generate_messages/fast
 
 # Convenience name for target.
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule
+.PHONY : turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+turtle_driver_generate_messages_eus: turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule
+
+.PHONY : turtle_driver_generate_messages_eus
+
+# fast build rule for target.
+turtle_driver_generate_messages_eus/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/build.make turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/build
+.PHONY : turtle_driver_generate_messages_eus/fast
+
+# Convenience name for target.
+turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_custom.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_custom.dir/rule
+.PHONY : turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_custom.dir/rule
+
+# Convenience name for target.
+_turtle_driver_generate_messages_check_deps_custom: turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_custom.dir/rule
+
+.PHONY : _turtle_driver_generate_messages_check_deps_custom
+
+# fast build rule for target.
+_turtle_driver_generate_messages_check_deps_custom/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_custom.dir/build.make turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_custom.dir/build
+.PHONY : _turtle_driver_generate_messages_check_deps_custom/fast
+
+# Convenience name for target.
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule
+.PHONY : turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+turtle_driver_generate_messages_lisp: turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule
+
+.PHONY : turtle_driver_generate_messages_lisp
+
+# fast build rule for target.
+turtle_driver_generate_messages_lisp/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/build.make turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/build
+.PHONY : turtle_driver_generate_messages_lisp/fast
+
+# Convenience name for target.
 turtle_driver/CMakeFiles/turtle_driver_generate_messages_cpp.dir/rule:
 	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver_generate_messages_cpp.dir/rule
 .PHONY : turtle_driver/CMakeFiles/turtle_driver_generate_messages_cpp.dir/rule
@@ -468,21 +558,6 @@ turtle_driver_gencpp/fast:
 .PHONY : turtle_driver_gencpp/fast
 
 # Convenience name for target.
-turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule
-.PHONY : turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-turtle_driver_generate_messages_eus: turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/rule
-
-.PHONY : turtle_driver_generate_messages_eus
-
-# fast build rule for target.
-turtle_driver_generate_messages_eus/fast:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/build.make turtle_driver/CMakeFiles/turtle_driver_generate_messages_eus.dir/build
-.PHONY : turtle_driver_generate_messages_eus/fast
-
-# Convenience name for target.
 turtle_driver/CMakeFiles/turtle_driver_geneus.dir/rule:
 	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver_geneus.dir/rule
 .PHONY : turtle_driver/CMakeFiles/turtle_driver_geneus.dir/rule
@@ -498,19 +573,19 @@ turtle_driver_geneus/fast:
 .PHONY : turtle_driver_geneus/fast
 
 # Convenience name for target.
-turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule
-.PHONY : turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule
+turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_square.dir/rule:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_square.dir/rule
+.PHONY : turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_square.dir/rule
 
 # Convenience name for target.
-turtle_driver_generate_messages_lisp: turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/rule
+_turtle_driver_generate_messages_check_deps_square: turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_square.dir/rule
 
-.PHONY : turtle_driver_generate_messages_lisp
+.PHONY : _turtle_driver_generate_messages_check_deps_square
 
 # fast build rule for target.
-turtle_driver_generate_messages_lisp/fast:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/build.make turtle_driver/CMakeFiles/turtle_driver_generate_messages_lisp.dir/build
-.PHONY : turtle_driver_generate_messages_lisp/fast
+_turtle_driver_generate_messages_check_deps_square/fast:
+	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_square.dir/build.make turtle_driver/CMakeFiles/_turtle_driver_generate_messages_check_deps_square.dir/build
+.PHONY : _turtle_driver_generate_messages_check_deps_square/fast
 
 # Convenience name for target.
 turtle_driver/CMakeFiles/turtle_driver_gennodejs.dir/rule:
@@ -557,36 +632,6 @@ turtle_driver_generate_messages_py/fast:
 	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/turtle_driver_generate_messages_py.dir/build.make turtle_driver/CMakeFiles/turtle_driver_generate_messages_py.dir/build
 .PHONY : turtle_driver_generate_messages_py/fast
 
-# Convenience name for target.
-turtle_driver/CMakeFiles/turtle_driver.dir/rule:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/turtle_driver.dir/rule
-.PHONY : turtle_driver/CMakeFiles/turtle_driver.dir/rule
-
-# Convenience name for target.
-turtle_driver: turtle_driver/CMakeFiles/turtle_driver.dir/rule
-
-.PHONY : turtle_driver
-
-# fast build rule for target.
-turtle_driver/fast:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/turtle_driver.dir/build.make turtle_driver/CMakeFiles/turtle_driver.dir/build
-.PHONY : turtle_driver/fast
-
-# Convenience name for target.
-turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f CMakeFiles/Makefile2 turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-.PHONY : turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/chris/Documents/pet_ws/build && $(MAKE) -f turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make turtle_driver/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
 src/turtle_mover.o: src/turtle_mover.cpp.o
 
 .PHONY : src/turtle_mover.o
@@ -621,7 +666,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... turtle_driver"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... install/local"
@@ -629,6 +674,10 @@ help:
 	@echo "... install"
 	@echo "... turtle_driver_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... _turtle_driver_generate_messages_check_deps_circle"
+	@echo "... test"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_py"
@@ -642,19 +691,18 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... _turtle_driver_generate_messages_check_deps_Vel"
 	@echo "... turtle_driver_generate_messages"
+	@echo "... turtle_driver_generate_messages_eus"
+	@echo "... _turtle_driver_generate_messages_check_deps_custom"
+	@echo "... install/strip"
+	@echo "... turtle_driver_generate_messages_lisp"
 	@echo "... list_install_components"
 	@echo "... turtle_driver_generate_messages_cpp"
 	@echo "... turtle_driver_gencpp"
-	@echo "... turtle_driver_generate_messages_eus"
 	@echo "... turtle_driver_geneus"
-	@echo "... install/strip"
-	@echo "... turtle_driver_generate_messages_lisp"
+	@echo "... _turtle_driver_generate_messages_check_deps_square"
 	@echo "... turtle_driver_gennodejs"
 	@echo "... turtle_driver_genpy"
 	@echo "... turtle_driver_generate_messages_py"
-	@echo "... turtle_driver"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... test"
 	@echo "... src/turtle_mover.o"
 	@echo "... src/turtle_mover.i"
 	@echo "... src/turtle_mover.s"

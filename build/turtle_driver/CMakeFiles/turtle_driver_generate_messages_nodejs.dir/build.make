@@ -54,6 +54,9 @@ CMAKE_BINARY_DIR = /home/chris/Documents/pet_ws/build
 include turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs.dir/progress.make
 
 turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/msg/Vel.js
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/circle.js
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/square.js
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/custom.js
 
 
 /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/msg/Vel.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
@@ -61,8 +64,26 @@ turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs: /home/chris/Doc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from turtle_driver/Vel.msg"
 	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/msg
 
+/home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/circle.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/circle.js: /home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from turtle_driver/circle.srv"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv
+
+/home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/square.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/square.js: /home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from turtle_driver/square.srv"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv
+
+/home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/custom.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/custom.js: /home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from turtle_driver/custom.srv"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv
+
 turtle_driver_generate_messages_nodejs: turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs
 turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/msg/Vel.js
+turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/circle.js
+turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/square.js
+turtle_driver_generate_messages_nodejs: /home/chris/Documents/pet_ws/devel/share/gennodejs/ros/turtle_driver/srv/custom.js
 turtle_driver_generate_messages_nodejs: turtle_driver/CMakeFiles/turtle_driver_generate_messages_nodejs.dir/build.make
 
 .PHONY : turtle_driver_generate_messages_nodejs

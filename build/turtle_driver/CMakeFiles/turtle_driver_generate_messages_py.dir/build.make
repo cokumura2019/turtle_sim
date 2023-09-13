@@ -54,7 +54,11 @@ CMAKE_BINARY_DIR = /home/chris/Documents/pet_ws/build
 include turtle_driver/CMakeFiles/turtle_driver_generate_messages_py.dir/progress.make
 
 turtle_driver/CMakeFiles/turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/_Vel.py
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_circle.py
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_square.py
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_custom.py
 turtle_driver/CMakeFiles/turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/__init__.py
+turtle_driver/CMakeFiles/turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/__init__.py
 
 
 /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/_Vel.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
@@ -62,14 +66,44 @@ turtle_driver/CMakeFiles/turtle_driver_generate_messages_py: /home/chris/Documen
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG turtle_driver/Vel"
 	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/chris/Documents/pet_ws/src/turtle_driver/msg/Vel.msg -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg
 
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_circle.py: /opt/ros/noetic/lib/genpy/gensrv_py.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_circle.py: /home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python code from SRV turtle_driver/circle"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/circle.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv
+
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_square.py: /opt/ros/noetic/lib/genpy/gensrv_py.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_square.py: /home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python code from SRV turtle_driver/square"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/square.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv
+
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_custom.py: /opt/ros/noetic/lib/genpy/gensrv_py.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_custom.py: /home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python code from SRV turtle_driver/custom"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/chris/Documents/pet_ws/src/turtle_driver/srv/custom.srv -Iturtle_driver:/home/chris/Documents/pet_ws/src/turtle_driver/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p turtle_driver -o /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv
+
 /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/_Vel.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for turtle_driver"
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_circle.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_square.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_custom.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python msg __init__.py for turtle_driver"
 	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg --initpy
+
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/_Vel.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_circle.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_square.py
+/home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/__init__.py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_custom.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/chris/Documents/pet_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python srv __init__.py for turtle_driver"
+	cd /home/chris/Documents/pet_ws/build/turtle_driver && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv --initpy
 
 turtle_driver_generate_messages_py: turtle_driver/CMakeFiles/turtle_driver_generate_messages_py
 turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/_Vel.py
+turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_circle.py
+turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_square.py
+turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/_custom.py
 turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/msg/__init__.py
+turtle_driver_generate_messages_py: /home/chris/Documents/pet_ws/devel/lib/python3/dist-packages/turtle_driver/srv/__init__.py
 turtle_driver_generate_messages_py: turtle_driver/CMakeFiles/turtle_driver_generate_messages_py.dir/build.make
 
 .PHONY : turtle_driver_generate_messages_py

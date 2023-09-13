@@ -2,23 +2,31 @@
 #include "geometry_msgs/Twist.h"
 #include "turtlesim/Pose.h"
 #include "vector2.h"
+#include "turtle_driver/circle.h"
+#include "turtle_driver/square.h"
+#include "turtle_driver/custom.h"
+
 
 ros::Publisher vel_publisher;
 ros::Subscriber pos_subscriber;
 
-void drive_circle(double radius, bool isForward);
-void drive_square (double sideLength);
+bool drive_circle(turtle_driver::circle::Request  &req, turtle_driver::circle::Response &res);
+bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::Response &res);
 void posecallback (const turtlesim::Pose &data);
-void follow_points (const vector2* points, const int numPoints);
+//bool follow_points (const vector2* points, const int numPoints);
+bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::Response &res);
+
+void init_position();
 
 
 double speed = 1;
 const double PI = 3.141592653589793238;
 
-vector2 curPos;
-double yaw;
+vector2 curPos = {5.44445, 5.44445};
+double yaw = 0;
+geometry_msgs::Twist stop_msg;
 
-
+/*
 int main(int argc, char *argv[])
 {
     ros::init(argc, argv, "turtle_mover");
@@ -31,6 +39,14 @@ int main(int argc, char *argv[])
     ROS_INFO("\n\n\n********** START TESTING **************");
     std::cout << "Enter mode: ";
     std::cin >> mode;
+
+    stop_msg.linear.x = 0;
+    stop_msg.linear.y = 0;
+    stop_msg.linear.z = 0;
+    stop_msg.angular.x = 0;
+    stop_msg.angular.y = 0;
+    stop_msg.angular.z = 0;
+    init_position();
 
   //  drive_circle(radius, true);
     if (mode == 0)
@@ -73,19 +89,70 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+*/
+
+int main(int argc, char *argv[])
+{
+    ros::init(argc, argv, "turtle_mover");
+    ros::NodeHandle n;
+
+    pos_subscriber = n.subscribe("/turtle1/pose", 1000, posecallback);
+    vel_publisher = n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 10);
+    
+    int mode;
+    ROS_INFO("\n\n\n********** START TESTING **************");
+
+    stop_msg.linear.x = 0;
+    stop_msg.linear.y = 0;
+    stop_msg.linear.z = 0;
+    stop_msg.angular.x = 0;
+    stop_msg.angular.y = 0;
+    stop_msg.angular.z = 0;
+    init_position();
+
+    ros::ServiceServer cService = n.advertiseService("circle", drive_circle);
+    ros::ServiceServer sService = n.advertiseService("square", drive_circle);
+    ros::ServiceServer custService = n.advertiseService("custom", drive_circle);
+
+    ros::spin();
+    std::cout << "Started listening for commands" << std::endl;
+
+    return 0;
+}
+
+
+void init_position ()
+{
+    ros::Rate loop_rate(100);
+
+    geometry_msgs::Twist temp_msg;
+    stop_msg.linear.x = 0.01;
+    stop_msg.linear.y = 0;
+    stop_msg.linear.z = 0;
+    stop_msg.angular.x = 0;
+    stop_msg.angular.y = 0;
+    stop_msg.angular.z = 0.01;
+    vel_publisher.publish(temp_msg);
+
+    ros::spinOnce();
+    loop_rate.sleep();
+
+    vel_publisher.publish(stop_msg);
+    ros::spinOnce();
+    loop_rate.sleep();
+}
 
 void posecallback (const turtlesim::Pose &data)
 {
     curPos = {data.x, data.y};
     yaw = data.theta;
-    ROS_INFO("Retrieved new angle %f", yaw);
+//    ROS_INFO("Retrieved new angle %f", yaw);
 }
 
-
-void drive_circle(const double radius, const bool isForward)
+bool drive_circle(turtle_driver::circle::Request  &req, turtle_driver::circle::Response &res)
 {
+    const double radius = req.r;
     geometry_msgs::Twist vel_msg;
-
     double expected_length = 2 * PI * radius;
 
     vel_msg.linear.x=speed;
@@ -127,10 +194,15 @@ void drive_circle(const double radius, const bool isForward)
     stop_msg.angular.z = 0;
 
     vel_publisher.publish(stop_msg);
+    
+    // Edit response object that the routine finished successfully
+    res.response = 1;
+    return true;
 }
 
-void drive_square (const double sideLength)
+bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::Response &res)
 {
+    const double sideLength = req.s;
     bool isCCW = 1;
     // For now, we will just have the turtle start the square from the angle it is currently at
     geometry_msgs::Twist forward_msg;
@@ -178,29 +250,33 @@ void drive_square (const double sideLength)
         while (angle_rotated < PI/2);
     }
 
-    geometry_msgs::Twist stop_msg;
-    stop_msg.linear.x = 0;
-    stop_msg.linear.y = 0;
-    stop_msg.linear.z = 0;
-    stop_msg.angular.x = 0;
-    stop_msg.angular.y = 0;
-    stop_msg.angular.z = 0;
-
     vel_publisher.publish(stop_msg);
+
+    // Mark that the function completed successfully
+    res.response = 1;
+    return 1;
 }
+//bool follow_points (const vector2* points, const int numPoints);
 
-void follow_points (const vector2* points, const int numPoints)
+bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::Response &res)
 {
+    vector2 all_points[20];
+    const int numPoints = req.x.size();
+    for (int i = 0 ; i < numPoints ; i++) all_points[i] = {req.x[i], req.y[i]};
 
-    ros::Rate loop_rate(100);
-    for (int i = 0 ; i < numPoints; ++i, ++points)
+    vector2* points = all_points;
+    ros::Rate loop_rate(500);
+    for (int i = 0; i < numPoints; ++i, ++points)
     {
         std::cout << "num: " << i << std::endl;
-        const vector2 currentPoint = curPos;
-        const vector2 point = *points;        
-        const vector2 diff = point - currentPoint;
+        const vector2 startPoint = curPos;
+        const double startAngle = yaw;
 
-        double angleToTurn = diff.get_angle();
+        const vector2 point = *points;        
+        const vector2 diff = point - startPoint;
+
+        double angleToOrientTo = diff.get_angle();
+        double angleDiff = abs(angleToOrientTo - startAngle);
         double distanceToTravel = diff.get_magnitude();
 
         geometry_msgs::Twist turn_msg;
@@ -209,19 +285,26 @@ void follow_points (const vector2* points, const int numPoints)
         turn_msg.linear.z=0;
         turn_msg.angular.x=0;
         turn_msg.angular.y=0;
-        turn_msg.angular.z=speed * (angleToTurn > 0 ? 1 : -1);
-
-        double angle_rotated = 0;
-        do 
+        turn_msg.angular.z=speed * (angleToOrientTo > 0 ? 1 : -1);
+        double tolerance = 0.15;
+        for (int i = 0 ; i < 7; i ++)
         {
-            vel_publisher.publish(turn_msg);
-            ros::spinOnce();
-            loop_rate.sleep();
-        //    angle_rotated = (t1 - t0) * abs(turn_msg.angular.z);
-        } 
-        while (abs(yaw - angleToTurn) >= 0.1);
+            double t0 = ros::Time::now().toSec();
+            do 
+            {
+                vel_publisher.publish(turn_msg);
+                ros::spinOnce();
+                loop_rate.sleep();
+            //    angle_rotated = (t1 - t0) * abs(turn_msg.angular.z);
+            } 
+            while (abs(yaw - angleToOrientTo) >= tolerance);
+
+            tolerance/= (2);
+            turn_msg.angular.z /= 3;
+        }
 
 
+        std::cout <<point.x << " " << point.y << std::endl;
         geometry_msgs::Twist forward_msg;
         forward_msg.linear.x=speed;
         forward_msg.linear.y=0;
@@ -229,21 +312,26 @@ void follow_points (const vector2* points, const int numPoints)
         forward_msg.angular.x=0;
         forward_msg.angular.y=0;
         forward_msg.angular.z=0;
-        do
-        {
-            vel_publisher.publish(forward_msg);
-            ros::spinOnce();
-            loop_rate.sleep();
-        } while ((curPos - point).get_magnitude() > .2 );
-        
-        geometry_msgs::Twist stop_msg;
-        stop_msg.linear.x = 0;
-        stop_msg.linear.y = 0;
-        stop_msg.linear.z = 0;
-        stop_msg.angular.x = 0;
-        stop_msg.angular.y = 0;
-        stop_msg.angular.z = 0;
-        vel_publisher.publish(stop_msg);
 
+        tolerance = 0.3;
+        for (int i = 0 ; i < 5; i++)
+        {
+            do {
+                vel_publisher.publish(forward_msg);
+                ros::spinOnce();
+                loop_rate.sleep();
+                std::cout <<curPos.x << " " << curPos.y << std::endl;
+            } while ((curPos - point).get_magnitude() > tolerance );
+
+            tolerance /= 2;
+            forward_msg.linear.x /= 3.5;
+        }
+
+        
+        vel_publisher.publish(stop_msg);
     }
+
+    // mark as completed successful and end the function
+    res.response = 1;
+    return 1;
 }
