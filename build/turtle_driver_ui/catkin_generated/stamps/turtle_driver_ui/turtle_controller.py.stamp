@@ -37,7 +37,7 @@ def drive_custom(x_points, y_points):
 
 if __name__ == "__main__":
 
-    print("Requesting drive")
+    print("Requesting drive\n")
     while 1:
         cmd = input("Please insert command! Type 'h' for help\n")
         if (cmd == 'h'):
@@ -56,13 +56,16 @@ if __name__ == "__main__":
                 x_pts = []
                 y_pts =[]
                 for i in range(1, len(args)):
-                    split = args[i].split()
+                    split = args[i].split(',')
+                    print(split)
                     x_pts.append(float(split[0]))
                     y_pts.append(float(split[1]))
-
+                print(x_pts)
+                print(type(x_pts[0]))
                 drive_custom(x_pts, y_pts)
 
             else:
                 print("Couldn't understand your command. Please ensure it is a supported command. See help for more")
 
-            drive_circle(1)
+        print("\n")
+

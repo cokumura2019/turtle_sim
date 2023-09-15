@@ -111,8 +111,8 @@ int main(int argc, char *argv[])
     init_position();
 
     ros::ServiceServer cService = n.advertiseService("circle", drive_circle);
-    ros::ServiceServer sService = n.advertiseService("square", drive_circle);
-    ros::ServiceServer custService = n.advertiseService("custom", drive_circle);
+    ros::ServiceServer sService = n.advertiseService("square", drive_square);
+    ros::ServiceServer custService = n.advertiseService("custom", follow_points);
 
     ros::spin();
     std::cout << "Started listening for commands" << std::endl;

@@ -56,10 +56,9 @@ if __name__ == "__main__":
                 x_pts = []
                 y_pts =[]
                 for i in range(1, len(args)):
-                    split = args[i].split()
+                    split = args[i].split(',')
                     x_pts.append(float(split[0]))
                     y_pts.append(float(split[1]))
-
                 drive_custom(x_pts, y_pts)
 
             else:
