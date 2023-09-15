@@ -37,7 +37,7 @@ def drive_custom(x_points, y_points):
 
 if __name__ == "__main__":
 
-    print("Requesting drive")
+    print("Requesting drive\n")
     while 1:
         cmd = input("Please insert command! Type 'h' for help\n")
         if (cmd == 'h'):
@@ -65,4 +65,5 @@ if __name__ == "__main__":
             else:
                 print("Couldn't understand your command. Please ensure it is a supported command. See help for more")
 
-            drive_circle(1)
+        print("\n")
+
