@@ -1,30 +1,48 @@
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 #include "turtlesim/Pose.h"
+#include "turtlesim/TeleportAbsolute.h"
 #include "vector2.h"
 #include "turtle_driver/circle.h"
 #include "turtle_driver/square.h"
 #include "turtle_driver/custom.h"
 
 
+
 ros::Publisher vel_publisher;
 ros::Subscriber pos_subscriber;
+
+
 
 bool drive_circle(turtle_driver::circle::Request  &req, turtle_driver::circle::Response &res);
 bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::Response &res);
 void posecallback (const turtlesim::Pose &data);
 //bool follow_points (const vector2* points, const int numPoints);
 bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::Response &res);
-
+void reset_position();
 void init_position();
 
+const double rightBound = 11-.02;
+const double leftBound = 0+.02;
+const double topBound = 11-.02;
+const double botBound = 0+.02;
+
+ros::NodeHandle* nPtr;
 
 double speed = 1;
 const double PI = 3.141592653589793238;
 
+const vector2 DEFAULT = {5.44445, 5.44445};
 vector2 curPos = {5.44445, 5.44445};
 double yaw = 0;
 geometry_msgs::Twist stop_msg;
+
+// Rais flag by settimg = 1
+int out_of_bounds_flag = 0;
+
+std::string pose_subscriber_topic_name;
+std::string vel_publish_topic_name;
+std::string tele_publish_topic_name;
 
 /*
 int main(int argc, char *argv[])
@@ -93,11 +111,17 @@ int main(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-    ros::init(argc, argv, "turtle_mover");
+    ros::init(argc, argv, "my_name_will_be_remapped");
     ros::NodeHandle n;
+    nPtr = &n;
 
-    pos_subscriber = n.subscribe("/turtle1/pose", 1000, posecallback);
-    vel_publisher = n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 10);
+    ros::param::get("/turtle_pose_topic", pose_subscriber_topic_name);
+    ros::param::get("/turtle_vel_topic", vel_publish_topic_name);
+    ros::param::get("/turtle_tele_topic", tele_publish_topic_name);
+
+
+    pos_subscriber = n.subscribe(pose_subscriber_topic_name, 1000, posecallback);
+    vel_publisher = n.advertise<geometry_msgs::Twist>(vel_publish_topic_name, 10);
     
     int mode;
     ROS_INFO("\n\n\n********** START TESTING **************");
@@ -132,7 +156,7 @@ void init_position ()
     stop_msg.angular.x = 0;
     stop_msg.angular.y = 0;
     stop_msg.angular.z = 0.01;
-    vel_publisher.publish(temp_msg);
+    vel_publisher.publish(stop_msg);
 
     ros::spinOnce();
     loop_rate.sleep();
@@ -140,12 +164,40 @@ void init_position ()
     vel_publisher.publish(stop_msg);
     ros::spinOnce();
     loop_rate.sleep();
+
+    out_of_bounds_flag = 0;
+}
+
+void reset_position()
+{
+    // Stop all motion first
+    vel_publisher.publish(stop_msg);
+
+    ros::ServiceClient client = nPtr->serviceClient<turtlesim::TeleportAbsolute>(tele_publish_topic_name);
+    turtlesim::TeleportAbsolute srv;
+    srv.request.x = DEFAULT.x;
+    srv.request.y = DEFAULT.y;
+    srv.request.theta = 0;
+    if (client.call(srv))
+    {
+        ROS_INFO("Reset turtle due to out-of-bounds;");
+    }
+    else
+    {
+        ROS_INFO("Failed to reset turtle");
+    }
+    out_of_bounds_flag=0;
 }
 
 void posecallback (const turtlesim::Pose &data)
 {
     curPos = {data.x, data.y};
     yaw = data.theta;
+
+    if (curPos.x > rightBound || curPos.x < leftBound || curPos.y > topBound || curPos.y < botBound)
+    {
+        out_of_bounds_flag = 1;
+    }
 //    ROS_INFO("Retrieved new angle %f", yaw);
 }
 
@@ -178,6 +230,13 @@ bool drive_circle(turtle_driver::circle::Request  &req, turtle_driver::circle::R
     ros::Rate loop_rate(1000);
     do 
     {
+        if (out_of_bounds_flag == 1)
+        {
+            reset_position();
+            res.response = 0;
+            return false;
+        }
+
         vel_publisher.publish(vel_msg);
         double t1 = ros::Time::now().toSec();
         current_angle = compute_ang_vel * (t1-t0);
@@ -229,6 +288,14 @@ bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::R
         double t0 = ros::Time::now().toSec();
         do 
         {
+            if (out_of_bounds_flag == 1)
+            {
+                reset_position();
+                res.response = 0;
+                return false;
+            }
+
+            
             vel_publisher.publish(forward_msg);
             double t1 = ros::Time::now().toSec();
             ros::spinOnce();
@@ -317,6 +384,13 @@ bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::
         for (int i = 0 ; i < 5; i++)
         {
             do {
+                if (out_of_bounds_flag == 1)
+                {
+                    reset_position();
+                    res.response = 0;
+                    return false;
+                }
+
                 vel_publisher.publish(forward_msg);
                 ros::spinOnce();
                 loop_rate.sleep();

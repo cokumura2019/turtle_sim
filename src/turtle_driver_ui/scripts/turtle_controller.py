@@ -12,31 +12,31 @@ def drive_circle(radius):
     try:
         drive = rospy.ServiceProxy('circle', circle)
         resp1 = drive(radius)
-        return resp1
+        return resp1.response
     except rospy.ServiceException as e:
-        print("Circle Service call failed: %s"%e)
+        return 0
 
 def drive_square(length):
     rospy.wait_for_service('square')
     try:
         drive = rospy.ServiceProxy('square', square)
         resp1 = drive(length)
-        return resp1
+        return resp1.response
     except rospy.ServiceException as e:
-        print("Square Service call failed: %s"%e)
+        return 0
 
 def drive_custom(x_points, y_points):
     rospy.wait_for_service('custom')
     try:
         drive = rospy.ServiceProxy('custom', custom)
         resp1 = drive(x_points, y_points)
-        return resp1
+        return resp1.response
     except rospy.ServiceException as e:
-        print("Custom Service call failed: %s"%e)
-
+        return 0
 
 if __name__ == "__main__":
-
+    rospy.init_node("i_will_be_remapped")
+    
     print("Requesting drive\n")
     while 1:
         cmd = input("Please insert command! Type 'h' for help\n")
@@ -49,9 +49,15 @@ if __name__ == "__main__":
         else:
             args = cmd.split()
             if (args[0] == 'circle'):
-                drive_circle(float(args[1]))
+                if drive_circle(float(args[1])):
+                    print("Circle maneuever succeeded")
+                else:
+                    print("Circle maneuever has failed")
             elif (args[0] == 'square'):
-                drive_square(float(args[1]))
+                if drive_square(float(args[1])):
+                    print("Square maneuever succeeded")
+                else:
+                    print("Square maneuever has failed")
             elif (args[0] == 'custom'):
                 x_pts = []
                 y_pts =[]
@@ -59,8 +65,10 @@ if __name__ == "__main__":
                     split = args[i].split(',')
                     x_pts.append(float(split[0]))
                     y_pts.append(float(split[1]))
-                drive_custom(x_pts, y_pts)
-
+                if drive_custom(x_pts, y_pts):
+                    print("Custom maneuever succeeded")
+                else:
+                    print("Custom maneuever has failed")
             else:
                 print("Couldn't understand your command. Please ensure it is a supported command. See help for more")
 

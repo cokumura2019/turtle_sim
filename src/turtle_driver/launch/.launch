@@ -1,0 +1,6 @@
+<launch>
+    <param name="turtle_pose_topic" type="str" value="/turtle1/pose" />
+    <param name="turtle_vel_topic" type="str" value="/turtle1/cmd_vel" />
+    <param name="turtle_tele_topic" type="str" value="/turtle1/teleport_absolute" />
+    <node name="turtle_controller" pkg="turtle_driver" type="turtle_driver" output="screen"/>
+</launch>
