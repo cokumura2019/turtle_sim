@@ -38,8 +38,9 @@ if __name__ == "__main__":
     rospy.init_node("i_will_be_remapped")
     
     print("Requesting drive\n")
-    while 1:
-        cmd = input("Please insert command! Type 'h' for help\n")
+    while not rospy.is_shutdown():
+        cmd = input("Please insert command! Type 'h' for help.\n")
+
         if (cmd == 'h'):
             print("""
             circle <radius> => drive in a circle of specified radius

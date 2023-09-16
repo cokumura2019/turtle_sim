@@ -7,8 +7,6 @@
 #include "turtle_driver/square.h"
 #include "turtle_driver/custom.h"
 
-
-
 ros::Publisher vel_publisher;
 ros::Subscriber pos_subscriber;
 
@@ -115,13 +113,13 @@ int main(int argc, char *argv[])
     ros::NodeHandle n;
     nPtr = &n;
 
-    ros::param::get("/turtle_pose_topic", pose_subscriber_topic_name);
-    ros::param::get("/turtle_vel_topic", vel_publish_topic_name);
-    ros::param::get("/turtle_tele_topic", tele_publish_topic_name);
+    ros::param::get("/turtle_controller/turtle_pose_topic", pose_subscriber_topic_name);
+    ros::param::get("/turtle_controller/turtle_vel_topic", vel_publish_topic_name);
+    ros::param::get("/turtle_controller/turtle_tele_topic", tele_publish_topic_name);
 
 
-    pos_subscriber = n.subscribe(pose_subscriber_topic_name, 1000, posecallback);
-    vel_publisher = n.advertise<geometry_msgs::Twist>(vel_publish_topic_name, 10);
+    pos_subscriber = n.subscribe<const turtlesim::Pose&>(pose_subscriber_topic_name, 1000, posecallback);
+    vel_publisher = n.advertise<const geometry_msgs::Twist>(vel_publish_topic_name, 10);
     
     int mode;
     ROS_INFO("\n\n\n********** START TESTING **************");
@@ -139,7 +137,6 @@ int main(int argc, char *argv[])
     ros::ServiceServer custService = n.advertiseService("custom", follow_points);
 
     ros::spin();
-    std::cout << "Started listening for commands" << std::endl;
 
     return 0;
 }

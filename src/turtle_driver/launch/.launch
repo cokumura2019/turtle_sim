@@ -1,6 +1,11 @@
 <launch>
-    <param name="turtle_pose_topic" type="str" value="/turtle1/pose" />
-    <param name="turtle_vel_topic" type="str" value="/turtle1/cmd_vel" />
-    <param name="turtle_tele_topic" type="str" value="/turtle1/teleport_absolute" />
-    <node name="turtle_controller" pkg="turtle_driver" type="turtle_driver" output="screen"/>
+    <arg name="pose_topic_name"      default="/turtle1/pose" />
+    <arg name="vel_topic_name"      default="/turtle1/cmd_vel" />
+    <arg name="tele_topic_name"      default="/turtle1/teleport_absolute" />
+
+    <node name="turtle_controller" pkg="turtle_driver" type="turtle_driver" output="screen">
+        <param name="turtle_pose_topic" type="str" value="$(arg pose_topic_name)" />
+        <param name="turtle_vel_topic" type="str" value="$(arg vel_topic_name)" />
+        <param name="turtle_tele_topic" type="str" value="$(arg tele_topic_name)" />
+    </node>
 </launch>
