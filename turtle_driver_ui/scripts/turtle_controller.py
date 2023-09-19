@@ -35,7 +35,7 @@ def drive_custom(x_points, y_points):
         return 0
 
 if __name__ == "__main__":
-    rospy.init_node("i_will_be_remapped")
+    rospy.init_node("turtle_controller_ui_cli")
     
     print("Requesting drive\n")
     while not rospy.is_shutdown():

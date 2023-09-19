@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-    ros::init(argc, argv, "my_name_will_be_remapped");
+    ros::init(argc, argv, "turtle_driver");
     ros::NodeHandle n;
     nPtr = &n;
 
