@@ -1,12 +1,12 @@
 <launch>
     <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_nodeeeee"/>
 
-    <include file="$(find turtle_driver)/launch/.launch">
+    <include file="$(find turtle_driver)/launch/turtle_driver.launch">
         <!--Writing the default values to the turtle driver launch file so that the topics align with turtle1 -->
         <arg name="pose_topic_name"      value="/turtle1/pose" />
         <arg name="vel_topic_name"      value="/turtle1/cmd_vel" />
         <arg name="tele_topic_name"      value="/turtle1/teleport_absolute" />
     </include>
 
-    <include file="$(find turtle_driver_ui)/launch/.launch"/>
+    <include file="$(find turtle_driver_ui)/launch/turtle_ui.launch"/>
 </launch>
