@@ -6,6 +6,7 @@
 #include "turtle_driver/circle.h"
 #include "turtle_driver/square.h"
 #include "turtle_driver/custom.h"
+using namespace std;
 
 ros::Publisher vel_publisher;
 ros::Subscriber pos_subscriber;
@@ -25,8 +26,6 @@ const double leftBound = 0+.02;
 const double topBound = 11-.02;
 const double botBound = 0+.02;
 
-ros::NodeHandle* nPtr;
-
 double speed = 1;
 const double PI = 3.141592653589793238;
 
@@ -42,12 +41,14 @@ std::string pose_subscriber_topic_name;
 std::string vel_publish_topic_name;
 std::string tele_publish_topic_name;
 
+std::unique_ptr<ros::NodeHandle> nodePtr;
+
 
 int main(int argc, char *argv[])
 {
     ros::init(argc, argv, "turtle_driver");
     ros::NodeHandle n;
-    nPtr = &n;
+    nodePtr = std::unique_ptr<ros::NodeHandle>(&n);
 
     ros::param::get("/turtle_controller/turtle_pose_topic", pose_subscriber_topic_name);
     ros::param::get("/turtle_controller/turtle_vel_topic", vel_publish_topic_name);
@@ -106,7 +107,7 @@ void reset_position()
     // Stop all motion first
     vel_publisher.publish(stop_msg);
 
-    ros::ServiceClient client = nPtr->serviceClient<turtlesim::TeleportAbsolute>(tele_publish_topic_name);
+    ros::ServiceClient client = nodePtr->serviceClient<turtlesim::TeleportAbsolute>(tele_publish_topic_name);
     turtlesim::TeleportAbsolute srv;
     srv.request.x = DEFAULT.x;
     srv.request.y = DEFAULT.y;
@@ -117,7 +118,7 @@ void reset_position()
     }
     else
     {
-        ROS_INFO("Failed to reset turtle");
+        ROS_ERROR("Failed to reset turtle");
     }
     out_of_bounds_flag=0;
 }
@@ -131,6 +132,7 @@ void posecallback (const turtlesim::Pose &data)
     {
         out_of_bounds_flag = 1;
     }
+    ROS_INFO("Position-angle : {%f, %f} - {%f}", curPos.x, curPos.y, yaw);
 //    ROS_INFO("Retrieved new angle %f", yaw);
 }
 
@@ -161,7 +163,7 @@ bool drive_circle(turtle_driver::circle::Request  &req, turtle_driver::circle::R
     double t0 = ros::Time::now().toSec();
     double current_angle=0;
     ros::Rate loop_rate(1000);
-    do 
+    while (current_angle < 2 * PI)
     {
         if (out_of_bounds_flag == 1)
         {
@@ -174,8 +176,8 @@ bool drive_circle(turtle_driver::circle::Request  &req, turtle_driver::circle::R
         double t1 = ros::Time::now().toSec();
         current_angle = compute_ang_vel * (t1-t0);
         ros::spinOnce();
-        loop_rate.sleep();
-    } while (current_angle < 2 * PI);
+        loop_rate.sleep(); 
+    }
 
     geometry_msgs::Twist stop_msg;
     stop_msg.linear.x = 0;
@@ -219,7 +221,7 @@ bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::R
     {
         double distance_traversed = 0;
         double t0 = ros::Time::now().toSec();
-        do 
+        while (distance_traversed < sideLength)
         {
             if (out_of_bounds_flag == 1)
             {
@@ -234,20 +236,18 @@ bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::R
             ros::spinOnce();
             loop_rate.sleep();
             distance_traversed = (t1 - t0) * forward_msg.linear.x;
-        } 
-        while (distance_traversed < sideLength);
+        }
 
         double angle_rotated = 0;
         t0 = ros::Time::now().toSec();
-        do 
+        while(angle_rotated < PI/2)
         {
             vel_publisher.publish(turn_msg);
             double t1 = ros::Time::now().toSec();
             ros::spinOnce();
             loop_rate.sleep();
             angle_rotated = (t1 - t0) * abs(turn_msg.angular.z);
-        } 
-        while (angle_rotated < PI/2);
+        }
     }
 
     vel_publisher.publish(stop_msg);
@@ -260,19 +260,17 @@ bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::R
 
 bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::Response &res)
 {
-    vector2 all_points[20];
+    std::array<vector2, 20> all_points;
     const int numPoints = req.x.size();
-    for (int i = 0 ; i < numPoints ; i++) all_points[i] = {req.x[i], req.y[i]};
+    for (int i = 0 ; i < numPoints ; i++) all_points.at(i) = {req.x[i], req.y[i]};
 
-    vector2* points = all_points;
     ros::Rate loop_rate(500);
-    for (int i = 0; i < numPoints; ++i, ++points)
+    for (int i = 0; i < numPoints; ++i)
     {
-        std::cout << "num: " << i << std::endl;
         const vector2 startPoint = curPos;
         const double startAngle = yaw;
 
-        const vector2 point = *points;        
+        const vector2 point = all_points.at(i);        
         const vector2 diff = point - startPoint;
 
         double angleToOrientTo = diff.get_angle();
@@ -290,21 +288,18 @@ bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::
         for (int i = 0 ; i < 7; i ++)
         {
             double t0 = ros::Time::now().toSec();
-            do 
+            while (abs(yaw - angleToOrientTo) >= tolerance)
             {
                 vel_publisher.publish(turn_msg);
                 ros::spinOnce();
                 loop_rate.sleep();
             //    angle_rotated = (t1 - t0) * abs(turn_msg.angular.z);
-            } 
-            while (abs(yaw - angleToOrientTo) >= tolerance);
+            }
 
             tolerance/= (2);
             turn_msg.angular.z /= 3;
         }
 
-
-        std::cout <<point.x << " " << point.y << std::endl;
         geometry_msgs::Twist forward_msg;
         forward_msg.linear.x=speed;
         forward_msg.linear.y=0;
@@ -316,7 +311,8 @@ bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::
         tolerance = 0.3;
         for (int i = 0 ; i < 5; i++)
         {
-            do {
+            while ((curPos - point).get_magnitude() > tolerance )
+            {
                 if (out_of_bounds_flag == 1)
                 {
                     reset_position();
@@ -327,8 +323,7 @@ bool follow_points (turtle_driver::custom::Request &req, turtle_driver::custom::
                 vel_publisher.publish(forward_msg);
                 ros::spinOnce();
                 loop_rate.sleep();
-                std::cout <<curPos.x << " " << curPos.y << std::endl;
-            } while ((curPos - point).get_magnitude() > tolerance );
+            }
 
             tolerance /= 2;
             forward_msg.linear.x /= 3.5;
