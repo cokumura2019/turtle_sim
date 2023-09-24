@@ -24,7 +24,7 @@ class circle_driver(drive_command_parser):
             try:
                 drive = rospy.ServiceProxy('circle', circle)
                 resp1 = drive(radius)
-                response = resp1.response
+                response = resp1.success
             except rospy.ServiceException as e:
                 pass
 
@@ -46,7 +46,7 @@ class square_driver(drive_command_parser):
             try:
                 drive = rospy.ServiceProxy('square', square)
                 resp1 = drive(length)
-                response = resp1.response
+                response = resp1.success
             except rospy.ServiceException as e:
                 pass
 
@@ -73,7 +73,7 @@ class custom_driver(drive_command_parser):
             try:
                 drive = rospy.ServiceProxy('custom', custom)
                 resp1 = drive(x_pts, y_pts)
-                response = resp1.response
+                response = resp1.success
             except rospy.ServiceException as e:
                 pass
 

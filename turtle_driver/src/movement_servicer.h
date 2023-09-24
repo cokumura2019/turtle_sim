@@ -250,21 +250,30 @@ class MovementServicer
                 turn_msg.angular.x=0;
                 turn_msg.angular.y=0;
                 turn_msg.angular.z=speed * (angleToOrientTo > 0 ? 1 : -1);
-                double tolerance = 0.15;
-                for (int i = 0 ; i < 7; i ++)
-                {
-                    double t0 = ros::Time::now().toSec();
-                    while (abs(this->tracker_helper->yaw() - angleToOrientTo) >= tolerance)
-                    {
-                        this->vel_topic_publisher.publish(turn_msg);
-                        ros::spinOnce();
-                        loop_rate.sleep();
-                    //    angle_rotated = (t1 - t0) * abs(turn_msg.angular.z);
-                    }
+                double tolerance = 0.005;
 
-                    tolerance/= (2);
-                    turn_msg.angular.z /= 3;
+                double t0 = ros::Time::now().toSec();
+                double lastError =0;
+                double kP = 0.4;
+                double kI = 0.1;
+                double integral = 0;
+                while (abs(this->tracker_helper->yaw() - angleToOrientTo) >= tolerance)
+                {
+                    this->vel_topic_publisher.publish(turn_msg);
+                    ros::spinOnce();
+                    loop_rate.sleep();
+
+                    double t1 = ros::Time::now().toSec();
+                    double error = this->tracker_helper->yaw() - angleToOrientTo;
+                    integral += error * (t1-t0);
+                    turn_msg.angular.z = kP * error + integral * kI ; 
+
+
+
+                    t0 = t1;
+                //    angle_rotated = (t1 - t0) * abs(turn_msg.angular.z);
                 }
+ 
 
                 geometry_msgs::Twist forward_msg;
                 forward_msg.linear.x=speed;

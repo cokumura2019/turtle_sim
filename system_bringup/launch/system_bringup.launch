@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_nodeeeee"/>
+    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node"/>
 
     <include file="$(find turtle_driver)/launch/turtle_driver.launch">
         <!--Writing the default values to the turtle driver launch file so that the topics align with turtle1 -->

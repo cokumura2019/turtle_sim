@@ -1,4 +1,5 @@
 <launch>
     <param name="turtle_pose_topic" type="str" value="/turtle1/pose" />
-    <node name="turtle_controller_ui" pkg="turtle_driver_ui" type="turtle_controller.py" output="screen" launch-prefix="gnome-terminal --tab --command"/>
+    <node name="turtle_controller_ui" pkg="turtle_driver_ui" type="turtle_controller.py" output="screen" launch-prefix="gnome-terminal --tab --command"/> 
+
 </launch>
