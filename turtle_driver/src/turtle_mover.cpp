@@ -10,17 +10,15 @@ std::unique_ptr<ros::NodeHandle> nodePtr;
 int main(int argc, char *argv[])
 {
     ros::init(argc, argv, "turtle_driver");
-    ros::NodeHandle n;
-    nodePtr = std::unique_ptr<ros::NodeHandle>(&n);
+    ros::NodeHandle node;
+    nodePtr = std::unique_ptr<ros::NodeHandle>(&node);
 
 
     TransfromTracker trasformTracker(nodePtr);
     MovementServicer movesMaster(nodePtr, &trasformTracker);
     movesMaster.InitializePosition();
 
-    int mode;
     ROS_INFO("\n\n\n********** START TESTING **************");
-
     ros::spin();
 
     return 0;

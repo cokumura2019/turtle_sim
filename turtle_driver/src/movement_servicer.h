@@ -112,7 +112,7 @@ class MovementServicer
         
         bool drive_circle(turtle_driver::circle::Request  &req, turtle_driver::circle::Response &res)
         {
-            const double radius = req.r;
+            const double radius = req.radius;
             const double expected_length = 2 * PI * radius;
             geometry_msgs::Twist vel_msg;
 
@@ -142,7 +142,7 @@ class MovementServicer
                 if (this->tracker_helper->out_of_bounds_flag() == 1)
                 {
                     this->reset_position();
-                    res.response = 0;
+                    res.success = 0;
                     return false;
                 }
 
@@ -156,13 +156,13 @@ class MovementServicer
             this->vel_topic_publisher.publish(stop_msg);
             
             // Edit response object that the routine finished successfully
-            res.response = 1;
+            res.success = 1;
             return true;
         }
 
         bool drive_square (turtle_driver::square::Request &req, turtle_driver::square::Response &res)
         {
-            const double sideLength = req.s;
+            const double sideLength = req.side_length;
             bool isCCW = 1;
             // For now, we will just have the turtle start the square from the angle it is currently at
             geometry_msgs::Twist forward_msg;
@@ -192,7 +192,7 @@ class MovementServicer
                     if (this->tracker_helper->out_of_bounds_flag() == 1)
                     {
                         reset_position();
-                        res.response = 0;
+                        res.success = 0;
                         return false;
                     }
 
@@ -219,7 +219,7 @@ class MovementServicer
             vel_topic_publisher.publish(stop_msg);
 
             // Mark that the function completed successfully
-            res.response = 1;
+            res.success = 1;
             return 1;
         }
         //bool follow_points (const vector2* points, const int numPoints);
@@ -282,7 +282,7 @@ class MovementServicer
                         if (this->tracker_helper->out_of_bounds_flag() == 1)
                         {
                             this->reset_position();
-                            res.response = 0;
+                            res.success = 0;
                             return false;
                         }
 
@@ -300,7 +300,7 @@ class MovementServicer
             }
 
             // mark as completed successful and end the function
-            res.response = 1;
+            res.success = 1;
             return 1;
         }
 };
