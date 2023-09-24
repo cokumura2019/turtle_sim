@@ -1,3 +1,8 @@
+#ifndef VECTOR2_H
+#define VECTOR2_H
+
+
+
 #include <cmath>
 
 struct vector2
@@ -40,3 +45,4 @@ struct vector2
 
 
 
+#endif
