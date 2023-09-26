@@ -13,6 +13,10 @@
 using namespace std;
 
 static const double PI = 3.141592653589793238;
+const double kP_turn = 0.4;
+const double kI_turn = 0.2;
+const double kP_for = 0.4;
+const double kI_for = 0.6;
 
 class MovementServicer
 {
@@ -35,6 +39,7 @@ class MovementServicer
 
     double speed = 1;
     const vector2 DEFAULT = {5.44445, 5.44445};
+
 
     public:
 
@@ -253,9 +258,6 @@ class MovementServicer
                 double tolerance = 0.005;
 
                 double t0 = ros::Time::now().toSec();
-                double lastError =0;
-                double kP = 0.4;
-                double kI = 0.1;
                 double integral = 0;
                 while (abs(this->tracker_helper->yaw() - angleToOrientTo) >= tolerance)
                 {
@@ -264,14 +266,10 @@ class MovementServicer
                     loop_rate.sleep();
 
                     double t1 = ros::Time::now().toSec();
-                    double error = this->tracker_helper->yaw() - angleToOrientTo;
+                    double error = atan2(sin(angleToOrientTo - this->tracker_helper->yaw()), cos(angleToOrientTo - this->tracker_helper->yaw()));
                     integral += error * (t1-t0);
-                    turn_msg.angular.z = kP * error + integral * kI ; 
-
-
-
+                    turn_msg.angular.z = kP_turn * error + integral * kI_turn ; 
                     t0 = t1;
-                //    angle_rotated = (t1 - t0) * abs(turn_msg.angular.z);
                 }
  
 
@@ -283,25 +281,29 @@ class MovementServicer
                 forward_msg.angular.y=0;
                 forward_msg.angular.z=0;
 
-                tolerance = 0.3;
-                for (int i = 0 ; i < 5; i++)
+                tolerance = 0.02;
+                integral = 0;
+                t0 = ros::Time::now().toSec();
+                while ((this->tracker_helper->position() - point).get_magnitude() > tolerance )
                 {
-                    while ((this->tracker_helper->position() - point).get_magnitude() > tolerance )
+                    if (this->tracker_helper->out_of_bounds_flag() == 1)
                     {
-                        if (this->tracker_helper->out_of_bounds_flag() == 1)
-                        {
-                            this->reset_position();
-                            res.success = 0;
-                            return false;
-                        }
-
-                        this->vel_topic_publisher.publish(forward_msg);
-                        ros::spinOnce();
-                        loop_rate.sleep();
+                        this->reset_position();
+                        res.success = 0;
+                        return false;
                     }
 
-                    tolerance /= 2;
-                    forward_msg.linear.x /= 3.5;
+                    this->vel_topic_publisher.publish(forward_msg);
+                    ros::spinOnce();
+                    loop_rate.sleep();
+                    double t1 = ros::Time::now().toSec();
+                    vector2 curr_diff = point - this->tracker_helper->position();
+                    int isBeforePoint =  (signbit(curr_diff.x) == signbit(diff.x)) & (signbit(curr_diff.y) == signbit(diff.y));
+                    double error = (this->tracker_helper->position() - point).get_magnitude() * (isBeforePoint == 1 ? 1 : -1);
+                    integral += error * (t1-t0);
+                    forward_msg.linear.x = kP_for * error + kI_for * integral;
+                    t0 = t1;
+
                 }
 
                 

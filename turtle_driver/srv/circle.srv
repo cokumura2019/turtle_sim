@@ -1,3 +1,3 @@
 float64 radius
 ---
-int32 success
+bool success
